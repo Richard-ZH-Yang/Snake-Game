@@ -11,9 +11,11 @@
 ####################################################################################################################
 import random
 import pygame
-import sys
-from pygame.locals import *
-from pygame import mixer
+# from pygame.locals import *
+# from pygame import mixer
+import inspect
+
+from pygame import *
 
 
 def game_start_info():
@@ -26,6 +28,7 @@ def game_start_info():
         display.blit(zitisurf, biaoti)
         keypress_info()
         if is_key_pressed():
+            print("KEY PRESSES")
             pygame.event.get()
             return
         pygame.display.update()
@@ -199,8 +202,8 @@ def initial_program():
     global cells_size, cells_w, cells_h, White, Black, Green, Red, DARKGreen, Yellow, Orange, blue
 
     pygame.init()
-    mixer.music.load('Yiruma - River Flows in You.flac')    # load background music
-    mixer.music.play(-1)
+    # mixer.music.load('Yiruma - River Flows in You.flac')    # load background music
+    # mixer.music.play(-1)
 
     W = 'up'
     S = 'down'  # keyboard keys
@@ -257,6 +260,7 @@ def main():
     """This is the main function. This function will initialize the whole program by initial_program() and
     game_start_info(), then it will have an always true while loop to run the game. If the snake dead, it will go to
     game_ends_info() and will continue the while loop if a key is pressed."""
+
     initial_program()
     game_start_info()
     while True:
@@ -264,6 +268,7 @@ def main():
 
         # game runs here
         while True:
+            print("in while loop")
             snake_movement()
             eat_apple()
             if is_game_over():
