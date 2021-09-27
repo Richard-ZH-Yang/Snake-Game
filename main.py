@@ -6,29 +6,29 @@
 #               the window, game over.
 #  Created by: Richard Yang
 #  Created On: Nov 25, 2019
-#  Last Modified: Dec 3, 2019
+#  Last Modified: Sep 27, 2021
 #  Known Limitations: If press WASD these four keys rapidly at the same time, snake will bite itself.
 ####################################################################################################################
 import random
-import pygame
-# from pygame.locals import *
-# from pygame import mixer
-import inspect
+import sys
 
-from pygame import *
+import pygame
+from pygame.locals import *
+# from pygame import mixer
+
+# from pygame import *
 
 
 def game_start_info():
     """When this function is called, it will keep showing a page says Snake Game. It will only return if key pressed"""
-    ziti = pygame.font.Font('OpenSans-Bold.ttf', 120)
-    zitisurf = ziti.render('Snake Game', True, blue)
+    front = pygame.font.Font('OpenSans-Bold.ttf', 120)
+    title = front.render('Snake Game', False, Green)
+    rect = title.get_rect()
+    rect.center = (Window_Width / 2, Window_Height / 2)
     while True:
-        biaoti = zitisurf.get_rect()
-        biaoti.center = (Window_Width / 2, Window_Height / 2)
-        display.blit(zitisurf, biaoti)
+        display.blit(title, rect)
         keypress_info()
         if is_key_pressed():
-            print("KEY PRESSES")
             pygame.event.get()
             return
         pygame.display.update()
@@ -141,7 +141,7 @@ def draw_apple(apple_positions):
 def keypress_info():
     """this function is used to show the message on the bottom of the page. It is designed to appear on the beginning of
     the game and on the end of the game"""
-    pressKeySurf = small_font.render('Press any key', True, White)
+    pressKeySurf = small_font.render('Press any key', False, White)
     pressKeyRect = pressKeySurf.get_rect()
     pressKeyRect.topleft = (Window_Width - 630, Window_Height - 30)
     display.blit(pressKeySurf, pressKeyRect)
@@ -268,7 +268,6 @@ def main():
 
         # game runs here
         while True:
-            print("in while loop")
             snake_movement()
             eat_apple()
             if is_game_over():
